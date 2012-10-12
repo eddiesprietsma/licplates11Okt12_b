@@ -1,0 +1,37 @@
+// rectify_plate.jls    
+// Rectifies (Warp + Rotate + Threshold) the plate
+// July 2012
+// Jaap van de Loosdrecht and Klaas Dijkstra
+// Input %currentimage: Original image 
+// Input %secondimage: Binary image containing the plate as the biggest blob 
+// Output: Rectified binary image containing the text of the plate
+// Result: true if warp was successful, false otherwise
+
+//copy script selected image (F6) and second selected image (F5)
+copy %currentimage OriginalImage
+copy %secondimage LicensePlateBin
+
+//Find corner points of the licenseplate
+$found = FindCornersRectangle LicensePlateBin EightConnected 0.5 Landscape &$tab
+if $found then
+  //Warp (rectify) licenseplate
+  Warp OriginalImage binaryCharacterImage ForwardT 	$tab[0] $tab[1] $tab[2] $tab[3] 						100 470 0 								NearestPixelInterpolation  
+  
+  //**********************************************//
+  //*** Exercise: Find license plate characters **//
+  //**********************************************//  
+
+  Convert binaryCharacterImage binaryCharacterImage Int16Image
+  //Automatic threshold finds black letters
+  ThresholdIsodata binaryCharacterImage DarkObject  
+  //Remove all blobs connected to the border
+  RemoveborderBlobs binaryCharacterImage EightConnected AllBorders
+  //Remove all blobs with an area less than 400
+  RemoveBlobs binaryCharacterImage EightConnected Area 1 400 UseX
+  
+  display binaryCharacterImage 
+  return true
+else
+  return false
+endif
+
