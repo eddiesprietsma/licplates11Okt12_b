@@ -131,7 +131,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(649, 515);
+            this.label2.Location = new System.Drawing.Point(649, 468);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 2;
@@ -140,7 +140,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 515);
+            this.label3.Location = new System.Drawing.Point(10, 468);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 3;
@@ -149,7 +149,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(549, 515);
+            this.label4.Location = new System.Drawing.Point(549, 468);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 13);
             this.label4.TabIndex = 4;
@@ -158,7 +158,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(228, 501);
+            this.label5.Location = new System.Drawing.Point(228, 454);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(60, 13);
             this.label5.TabIndex = 5;
@@ -167,7 +167,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(428, 501);
+            this.label6.Location = new System.Drawing.Point(428, 454);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 6;
@@ -238,7 +238,7 @@
             // lblMatchedCount
             // 
             this.lblMatchedCount.AutoSize = true;
-            this.lblMatchedCount.Location = new System.Drawing.Point(12, 671);
+            this.lblMatchedCount.Location = new System.Drawing.Point(12, 624);
             this.lblMatchedCount.Name = "lblMatchedCount";
             this.lblMatchedCount.Size = new System.Drawing.Size(13, 13);
             this.lblMatchedCount.TabIndex = 19;
@@ -247,7 +247,7 @@
             // lblFindPlateErrCount
             // 
             this.lblFindPlateErrCount.AutoSize = true;
-            this.lblFindPlateErrCount.Location = new System.Drawing.Point(228, 671);
+            this.lblFindPlateErrCount.Location = new System.Drawing.Point(228, 624);
             this.lblFindPlateErrCount.Name = "lblFindPlateErrCount";
             this.lblFindPlateErrCount.Size = new System.Drawing.Size(13, 13);
             this.lblFindPlateErrCount.TabIndex = 20;
@@ -256,7 +256,7 @@
             // lblMatchPlateErrCount
             // 
             this.lblMatchPlateErrCount.AutoSize = true;
-            this.lblMatchPlateErrCount.Location = new System.Drawing.Point(428, 671);
+            this.lblMatchPlateErrCount.Location = new System.Drawing.Point(428, 624);
             this.lblMatchPlateErrCount.Name = "lblMatchPlateErrCount";
             this.lblMatchPlateErrCount.Size = new System.Drawing.Size(13, 13);
             this.lblMatchPlateErrCount.TabIndex = 21;
@@ -265,7 +265,7 @@
             // lblLowConfidenceCount
             // 
             this.lblLowConfidenceCount.AutoSize = true;
-            this.lblLowConfidenceCount.Location = new System.Drawing.Point(549, 671);
+            this.lblLowConfidenceCount.Location = new System.Drawing.Point(549, 624);
             this.lblLowConfidenceCount.Name = "lblLowConfidenceCount";
             this.lblLowConfidenceCount.Size = new System.Drawing.Size(13, 13);
             this.lblLowConfidenceCount.TabIndex = 22;
@@ -274,7 +274,7 @@
             // lblErrorsCount
             // 
             this.lblErrorsCount.AutoSize = true;
-            this.lblErrorsCount.Location = new System.Drawing.Point(649, 671);
+            this.lblErrorsCount.Location = new System.Drawing.Point(649, 624);
             this.lblErrorsCount.Name = "lblErrorsCount";
             this.lblErrorsCount.Size = new System.Drawing.Size(13, 13);
             this.lblErrorsCount.TabIndex = 23;
@@ -293,7 +293,7 @@
             // 
             this.lblLexiconResult.AutoSize = true;
             this.lblLexiconResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLexiconResult.Location = new System.Drawing.Point(105, 428);
+            this.lblLexiconResult.Location = new System.Drawing.Point(105, 414);
             this.lblLexiconResult.Name = "lblLexiconResult";
             this.lblLexiconResult.Size = new System.Drawing.Size(96, 25);
             this.lblLexiconResult.TabIndex = 25;
@@ -320,7 +320,7 @@
             // 
             // ErrorTB
             // 
-            this.ErrorTB.Location = new System.Drawing.Point(71, 725);
+            this.ErrorTB.Location = new System.Drawing.Point(71, 678);
             this.ErrorTB.Name = "ErrorTB";
             this.ErrorTB.ReadOnly = true;
             this.ErrorTB.Size = new System.Drawing.Size(681, 20);
@@ -329,7 +329,7 @@
             // lstMatched
             // 
             this.lstMatched.FormattingEnabled = true;
-            this.lstMatched.Location = new System.Drawing.Point(13, 534);
+            this.lstMatched.Location = new System.Drawing.Point(13, 487);
             this.lstMatched.Name = "lstMatched";
             this.lstMatched.Size = new System.Drawing.Size(100, 134);
             this.lstMatched.TabIndex = 30;
@@ -338,7 +338,7 @@
             // lstFindPlateErr
             // 
             this.lstFindPlateErr.FormattingEnabled = true;
-            this.lstFindPlateErr.Location = new System.Drawing.Point(231, 534);
+            this.lstFindPlateErr.Location = new System.Drawing.Point(231, 487);
             this.lstFindPlateErr.Name = "lstFindPlateErr";
             this.lstFindPlateErr.Size = new System.Drawing.Size(100, 134);
             this.lstFindPlateErr.TabIndex = 31;
@@ -347,7 +347,7 @@
             // lstMatchPlateErr
             // 
             this.lstMatchPlateErr.FormattingEnabled = true;
-            this.lstMatchPlateErr.Location = new System.Drawing.Point(431, 534);
+            this.lstMatchPlateErr.Location = new System.Drawing.Point(431, 487);
             this.lstMatchPlateErr.Name = "lstMatchPlateErr";
             this.lstMatchPlateErr.Size = new System.Drawing.Size(100, 134);
             this.lstMatchPlateErr.TabIndex = 32;
@@ -356,7 +356,7 @@
             // lstLowConfidence
             // 
             this.lstLowConfidence.FormattingEnabled = true;
-            this.lstLowConfidence.Location = new System.Drawing.Point(552, 534);
+            this.lstLowConfidence.Location = new System.Drawing.Point(552, 487);
             this.lstLowConfidence.Name = "lstLowConfidence";
             this.lstLowConfidence.Size = new System.Drawing.Size(100, 134);
             this.lstLowConfidence.TabIndex = 33;
@@ -365,7 +365,7 @@
             // lstErrors
             // 
             this.lstErrors.FormattingEnabled = true;
-            this.lstErrors.Location = new System.Drawing.Point(652, 534);
+            this.lstErrors.Location = new System.Drawing.Point(652, 487);
             this.lstErrors.Name = "lstErrors";
             this.lstErrors.Size = new System.Drawing.Size(100, 134);
             this.lstErrors.TabIndex = 34;
@@ -404,7 +404,7 @@
             // lstLexicon
             // 
             this.lstLexicon.FormattingEnabled = true;
-            this.lstLexicon.Location = new System.Drawing.Point(113, 534);
+            this.lstLexicon.Location = new System.Drawing.Point(113, 487);
             this.lstLexicon.Name = "lstLexicon";
             this.lstLexicon.Size = new System.Drawing.Size(100, 134);
             this.lstLexicon.TabIndex = 38;
@@ -413,7 +413,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(110, 515);
+            this.label10.Location = new System.Drawing.Point(110, 468);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 39;
@@ -422,7 +422,7 @@
             // lblLexiconCount
             // 
             this.lblLexiconCount.AutoSize = true;
-            this.lblLexiconCount.Location = new System.Drawing.Point(110, 671);
+            this.lblLexiconCount.Location = new System.Drawing.Point(110, 624);
             this.lblLexiconCount.Name = "lblLexiconCount";
             this.lblLexiconCount.Size = new System.Drawing.Size(13, 13);
             this.lblLexiconCount.TabIndex = 40;
@@ -468,7 +468,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(13, 725);
+            this.label13.Location = new System.Drawing.Point(13, 678);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 13);
             this.label13.TabIndex = 45;
@@ -478,7 +478,7 @@
             // 
             this.lblResult.AutoSize = true;
             this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResult.Location = new System.Drawing.Point(105, 403);
+            this.lblResult.Location = new System.Drawing.Point(105, 389);
             this.lblResult.Name = "lblResult";
             this.lblResult.Size = new System.Drawing.Size(96, 25);
             this.lblResult.TabIndex = 46;
@@ -488,7 +488,7 @@
             // 
             this.lblResultCapt.AutoSize = true;
             this.lblResultCapt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultCapt.Location = new System.Drawing.Point(9, 403);
+            this.lblResultCapt.Location = new System.Drawing.Point(9, 389);
             this.lblResultCapt.Name = "lblResultCapt";
             this.lblResultCapt.Size = new System.Drawing.Size(73, 25);
             this.lblResultCapt.TabIndex = 47;
@@ -498,7 +498,7 @@
             // 
             this.lblLexiconCapt.AutoSize = true;
             this.lblLexiconCapt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLexiconCapt.Location = new System.Drawing.Point(9, 428);
+            this.lblLexiconCapt.Location = new System.Drawing.Point(9, 414);
             this.lblLexiconCapt.Name = "lblLexiconCapt";
             this.lblLexiconCapt.Size = new System.Drawing.Size(87, 25);
             this.lblLexiconCapt.TabIndex = 48;
@@ -508,7 +508,7 @@
             // 
             this.lblError1.AutoSize = true;
             this.lblError1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError1.Location = new System.Drawing.Point(303, 403);
+            this.lblError1.Location = new System.Drawing.Point(303, 389);
             this.lblError1.Name = "lblError1";
             this.lblError1.Size = new System.Drawing.Size(24, 25);
             this.lblError1.TabIndex = 50;
@@ -518,7 +518,7 @@
             // 
             this.lblError2.AutoSize = true;
             this.lblError2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError2.Location = new System.Drawing.Point(358, 403);
+            this.lblError2.Location = new System.Drawing.Point(358, 389);
             this.lblError2.Name = "lblError2";
             this.lblError2.Size = new System.Drawing.Size(24, 25);
             this.lblError2.TabIndex = 52;
@@ -528,7 +528,7 @@
             // 
             this.lblError3.AutoSize = true;
             this.lblError3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError3.Location = new System.Drawing.Point(413, 403);
+            this.lblError3.Location = new System.Drawing.Point(413, 389);
             this.lblError3.Name = "lblError3";
             this.lblError3.Size = new System.Drawing.Size(24, 25);
             this.lblError3.TabIndex = 54;
@@ -538,7 +538,7 @@
             // 
             this.lblError4.AutoSize = true;
             this.lblError4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError4.Location = new System.Drawing.Point(468, 403);
+            this.lblError4.Location = new System.Drawing.Point(468, 389);
             this.lblError4.Name = "lblError4";
             this.lblError4.Size = new System.Drawing.Size(24, 25);
             this.lblError4.TabIndex = 56;
@@ -548,7 +548,7 @@
             // 
             this.lblError5.AutoSize = true;
             this.lblError5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError5.Location = new System.Drawing.Point(523, 403);
+            this.lblError5.Location = new System.Drawing.Point(523, 389);
             this.lblError5.Name = "lblError5";
             this.lblError5.Size = new System.Drawing.Size(24, 25);
             this.lblError5.TabIndex = 58;
@@ -558,7 +558,7 @@
             // 
             this.lblConfidence.AutoSize = true;
             this.lblConfidence.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfidence.Location = new System.Drawing.Point(207, 403);
+            this.lblConfidence.Location = new System.Drawing.Point(207, 389);
             this.lblConfidence.Name = "lblConfidence";
             this.lblConfidence.Size = new System.Drawing.Size(24, 25);
             this.lblConfidence.TabIndex = 59;
@@ -568,7 +568,7 @@
             // 
             this.lblLexiconConfidence.AutoSize = true;
             this.lblLexiconConfidence.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLexiconConfidence.Location = new System.Drawing.Point(207, 428);
+            this.lblLexiconConfidence.Location = new System.Drawing.Point(207, 414);
             this.lblLexiconConfidence.Name = "lblLexiconConfidence";
             this.lblLexiconConfidence.Size = new System.Drawing.Size(24, 25);
             this.lblLexiconConfidence.TabIndex = 60;
@@ -577,7 +577,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(209, 390);
+            this.label22.Location = new System.Drawing.Point(209, 376);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(61, 13);
             this.label22.TabIndex = 61;
@@ -586,7 +586,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(301, 390);
+            this.label24.Location = new System.Drawing.Point(301, 376);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(38, 13);
             this.label24.TabIndex = 62;
@@ -595,7 +595,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(356, 390);
+            this.label26.Location = new System.Drawing.Point(356, 376);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(38, 13);
             this.label26.TabIndex = 63;
@@ -604,7 +604,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(411, 390);
+            this.label27.Location = new System.Drawing.Point(411, 376);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(38, 13);
             this.label27.TabIndex = 64;
@@ -613,7 +613,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(466, 390);
+            this.label28.Location = new System.Drawing.Point(466, 376);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(38, 13);
             this.label28.TabIndex = 65;
@@ -622,7 +622,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(521, 390);
+            this.label29.Location = new System.Drawing.Point(521, 376);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(38, 13);
             this.label29.TabIndex = 66;
@@ -631,7 +631,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(576, 390);
+            this.label30.Location = new System.Drawing.Point(576, 376);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(38, 13);
             this.label30.TabIndex = 68;
@@ -641,7 +641,7 @@
             // 
             this.lblError6.AutoSize = true;
             this.lblError6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError6.Location = new System.Drawing.Point(578, 403);
+            this.lblError6.Location = new System.Drawing.Point(578, 389);
             this.lblError6.Name = "lblError6";
             this.lblError6.Size = new System.Drawing.Size(24, 25);
             this.lblError6.TabIndex = 67;
@@ -651,7 +651,7 @@
             // 
             this.lblExpectedCaption.AutoSize = true;
             this.lblExpectedCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpectedCaption.Location = new System.Drawing.Point(9, 454);
+            this.lblExpectedCaption.Location = new System.Drawing.Point(9, 440);
             this.lblExpectedCaption.Name = "lblExpectedCaption";
             this.lblExpectedCaption.Size = new System.Drawing.Size(102, 25);
             this.lblExpectedCaption.TabIndex = 69;
@@ -661,7 +661,7 @@
             // 
             this.lblExpected.AutoSize = true;
             this.lblExpected.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblExpected.Location = new System.Drawing.Point(105, 454);
+            this.lblExpected.Location = new System.Drawing.Point(105, 440);
             this.lblExpected.Name = "lblExpected";
             this.lblExpected.Size = new System.Drawing.Size(96, 25);
             this.lblExpected.TabIndex = 70;
@@ -670,7 +670,7 @@
             // lstRectifyPlateErr
             // 
             this.lstRectifyPlateErr.FormattingEnabled = true;
-            this.lstRectifyPlateErr.Location = new System.Drawing.Point(331, 534);
+            this.lstRectifyPlateErr.Location = new System.Drawing.Point(331, 487);
             this.lstRectifyPlateErr.Name = "lstRectifyPlateErr";
             this.lstRectifyPlateErr.Size = new System.Drawing.Size(100, 134);
             this.lstRectifyPlateErr.TabIndex = 71;
@@ -679,7 +679,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(328, 501);
+            this.label14.Location = new System.Drawing.Point(328, 454);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(90, 13);
             this.label14.TabIndex = 72;
@@ -688,7 +688,7 @@
             // lblRectfyPlateErrCount
             // 
             this.lblRectfyPlateErrCount.AutoSize = true;
-            this.lblRectfyPlateErrCount.Location = new System.Drawing.Point(328, 671);
+            this.lblRectfyPlateErrCount.Location = new System.Drawing.Point(328, 624);
             this.lblRectfyPlateErrCount.Name = "lblRectfyPlateErrCount";
             this.lblRectfyPlateErrCount.Size = new System.Drawing.Size(13, 13);
             this.lblRectfyPlateErrCount.TabIndex = 73;
@@ -697,7 +697,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(228, 514);
+            this.label15.Location = new System.Drawing.Point(228, 467);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(69, 13);
             this.label15.TabIndex = 74;
@@ -706,7 +706,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(328, 514);
+            this.label16.Location = new System.Drawing.Point(328, 467);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(69, 13);
             this.label16.TabIndex = 75;
@@ -715,7 +715,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(429, 514);
+            this.label17.Location = new System.Drawing.Point(429, 467);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(69, 13);
             this.label17.TabIndex = 76;
@@ -723,7 +723,7 @@
             // 
             // btnExportMatched
             // 
-            this.btnExportMatched.Location = new System.Drawing.Point(16, 685);
+            this.btnExportMatched.Location = new System.Drawing.Point(16, 638);
             this.btnExportMatched.Name = "btnExportMatched";
             this.btnExportMatched.Size = new System.Drawing.Size(75, 23);
             this.btnExportMatched.TabIndex = 77;
@@ -733,7 +733,7 @@
             // 
             // btnExportMatchedLexicon
             // 
-            this.btnExportMatchedLexicon.Location = new System.Drawing.Point(113, 685);
+            this.btnExportMatchedLexicon.Location = new System.Drawing.Point(113, 638);
             this.btnExportMatchedLexicon.Name = "btnExportMatchedLexicon";
             this.btnExportMatchedLexicon.Size = new System.Drawing.Size(75, 23);
             this.btnExportMatchedLexicon.TabIndex = 78;
@@ -743,7 +743,7 @@
             // 
             // btnExportFindPlate
             // 
-            this.btnExportFindPlate.Location = new System.Drawing.Point(231, 685);
+            this.btnExportFindPlate.Location = new System.Drawing.Point(231, 638);
             this.btnExportFindPlate.Name = "btnExportFindPlate";
             this.btnExportFindPlate.Size = new System.Drawing.Size(75, 23);
             this.btnExportFindPlate.TabIndex = 79;
@@ -753,7 +753,7 @@
             // 
             // bntExportFindCharacters
             // 
-            this.bntExportFindCharacters.Location = new System.Drawing.Point(331, 685);
+            this.bntExportFindCharacters.Location = new System.Drawing.Point(331, 638);
             this.bntExportFindCharacters.Name = "bntExportFindCharacters";
             this.bntExportFindCharacters.Size = new System.Drawing.Size(75, 23);
             this.bntExportFindCharacters.TabIndex = 80;
@@ -763,7 +763,7 @@
             // 
             // btnExportMatchPlate
             // 
-            this.btnExportMatchPlate.Location = new System.Drawing.Point(432, 685);
+            this.btnExportMatchPlate.Location = new System.Drawing.Point(432, 638);
             this.btnExportMatchPlate.Name = "btnExportMatchPlate";
             this.btnExportMatchPlate.Size = new System.Drawing.Size(75, 23);
             this.btnExportMatchPlate.TabIndex = 81;
@@ -773,7 +773,7 @@
             // 
             // btnExportLowConfidence
             // 
-            this.btnExportLowConfidence.Location = new System.Drawing.Point(552, 685);
+            this.btnExportLowConfidence.Location = new System.Drawing.Point(552, 638);
             this.btnExportLowConfidence.Name = "btnExportLowConfidence";
             this.btnExportLowConfidence.Size = new System.Drawing.Size(75, 23);
             this.btnExportLowConfidence.TabIndex = 82;
@@ -783,7 +783,7 @@
             // 
             // btnExportErrors
             // 
-            this.btnExportErrors.Location = new System.Drawing.Point(652, 685);
+            this.btnExportErrors.Location = new System.Drawing.Point(652, 638);
             this.btnExportErrors.Name = "btnExportErrors";
             this.btnExportErrors.Size = new System.Drawing.Size(75, 23);
             this.btnExportErrors.TabIndex = 83;
@@ -813,7 +813,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 748);
+            this.ClientSize = new System.Drawing.Size(758, 705);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.lblFolder);
             this.Controls.Add(this.btnExportErrors);
