@@ -50,6 +50,7 @@ namespace LicPlate
             Int32Image binaryPlateImage32 = new Int32Image();
             VisionLab.Convert(binaryPlateImage, binaryPlateImage32);
 
+           
             //Remove blobs with small areas
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_Area, c_remove_blobs_min, c_remove_blobs_max);
 
@@ -57,14 +58,16 @@ namespace LicPlate
             VisionLab.RemoveBorderBlobs(binaryPlateImage32, Connected.EightConnected, Border.AllBorders);
 
             //Length Breath Ratio
-            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 0, 2);
-            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 7, 10);
+            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 0, 2.5);
+            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 6.7, 10);
             
             //Convert back to a 16 bit format
             VisionLab.Convert(binaryPlateImage32, binaryPlateImage);
 
             binaryPlateImage32.Dispose();
             plateImageHSV.Dispose();
+
+            GC.Collect();
 
             //Return true, if pixels found
             return (VisionLab.SumIntPixels(binaryPlateImage) > 0);
