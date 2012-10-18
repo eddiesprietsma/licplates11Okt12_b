@@ -2,6 +2,8 @@
 
 namespace LicPlate
 {
+    public enum TresholdConditions { NORMAAL, OVERBELICHT, ONDERBELICHT };
+
     public class LicensePlateMatcher
     {
         /*  Description:
@@ -18,17 +20,59 @@ namespace LicPlate
 	            //License plate found?
 	            bool 
          */	
-        public static bool FindPlate(RGB888Image plateImage, ref Int16Image binaryPlateImage)
+        public static bool FindPlate(RGB888Image plateImage, ref Int16Image binaryPlateImage, TresholdConditions state)
         {
             //Constants
-            const int c_threshold_h_min = 21;
-            const int c_threshold_h_max = 70;
-            const int c_threshold_s_min = 100;
-            const int c_threshold_s_max = 255;
-            const int c_threshold_v_min = 100;
-            const int c_threshold_v_max = 255;
-            const int c_remove_blobs_min = 1;
-            const int c_remove_blobs_max = 500;
+            int c_threshold_h_min;
+            int c_threshold_h_max;
+            int c_threshold_s_min;
+            int c_threshold_s_max;
+            int c_threshold_v_min;
+            int c_threshold_v_max;
+            int c_remove_blobs_min;
+            int c_remove_blobs_max;
+            
+            switch(state)
+            {
+                case(TresholdConditions.NORMAAL):
+                    c_threshold_h_min = 21;
+                    c_threshold_h_max = 70;
+                    c_threshold_s_min = 100;
+                    c_threshold_s_max = 255;
+                    c_threshold_v_min = 100;
+                    c_threshold_v_max = 255;
+                    c_remove_blobs_min = 1;
+                    c_remove_blobs_max = 500;
+                    break;
+                case(TresholdConditions.ONDERBELICHT):
+                    c_threshold_h_min = 21;
+                    c_threshold_h_max = 70;
+                    c_threshold_s_min = 100;
+                    c_threshold_s_max = 255;
+                    c_threshold_v_min = 100;
+                    c_threshold_v_max = 255;
+                    c_remove_blobs_min = 1;
+                    c_remove_blobs_max = 500;
+                    break;
+                case(TresholdConditions.OVERBELICHT):
+                    c_threshold_h_min = 21;
+                    c_threshold_h_max = 70;
+                    c_threshold_s_min = 100;
+                    c_threshold_s_max = 255;
+                    c_threshold_v_min = 100;
+                    c_threshold_v_max = 255;
+                    c_remove_blobs_min = 1;
+                    c_remove_blobs_max = 500;
+                    break;
+            }
+            //const int c_threshold_h_min = 21;
+            //const int c_threshold_h_max = 70;
+            //const int c_threshold_s_min = 100;
+            //const int c_threshold_s_max = 255;
+            //const int c_threshold_v_min = 100;
+            //const int c_threshold_v_max = 255;
+            //const int c_remove_blobs_min = 1;
+            //const int c_remove_blobs_max = 500;
             
 
 
@@ -50,6 +94,8 @@ namespace LicPlate
             Int32Image binaryPlateImage32 = new Int32Image();
             VisionLab.Convert(binaryPlateImage, binaryPlateImage32);
 
+            //Int32Image binPlateImage32 = new Int32Image();
+            //.Opening(binaryPlateImage32, binPlateImage32, new Mask_Int32(10, 10, 1));
            
             //Remove blobs with small areas
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_Area, c_remove_blobs_min, c_remove_blobs_max);
@@ -58,12 +104,14 @@ namespace LicPlate
             VisionLab.RemoveBorderBlobs(binaryPlateImage32, Connected.EightConnected, Border.AllBorders);
 
             //Length Breath Ratio
-            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 0, 2.5);
-            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 6.7, 10);
-            
+            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 0, 2.3);
+            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 6.9, 10);
+            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 0, 4);
+
             //Convert back to a 16 bit format
             VisionLab.Convert(binaryPlateImage32, binaryPlateImage);
 
+            //binPlateImage32.Dispose();
             binaryPlateImage32.Dispose();
             plateImageHSV.Dispose();
 
