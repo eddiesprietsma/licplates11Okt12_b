@@ -23,20 +23,20 @@ namespace LicPlate
         public static bool FindPlate(RGB888Image plateImage, ref Int16Image binaryPlateImage, TresholdConditions state)
         {
             //Constants
-            int c_threshold_h_min;
-            int c_threshold_h_max;
-            int c_threshold_s_min;
-            int c_threshold_s_max;
-            int c_threshold_v_min;
-            int c_threshold_v_max;
-            int c_remove_blobs_min;
-            int c_remove_blobs_max;
+            int c_threshold_h_min = 0;
+            int c_threshold_h_max = 0;
+            int c_threshold_s_min = 0;
+            int c_threshold_s_max = 0;
+            int c_threshold_v_min = 0;
+            int c_threshold_v_max = 0;
+            int c_remove_blobs_min = 0;
+            int c_remove_blobs_max = 0;
             
             switch(state)
             {
                 case(TresholdConditions.NORMAAL):
                     c_threshold_h_min = 21;
-                    c_threshold_h_max = 70;
+                    c_threshold_h_max = 50;
                     c_threshold_s_min = 100;
                     c_threshold_s_max = 255;
                     c_threshold_v_min = 100;
@@ -45,21 +45,21 @@ namespace LicPlate
                     c_remove_blobs_max = 500;
                     break;
                 case(TresholdConditions.ONDERBELICHT):
-                    c_threshold_h_min = 21;
-                    c_threshold_h_max = 70;
-                    c_threshold_s_min = 100;
-                    c_threshold_s_max = 255;
-                    c_threshold_v_min = 100;
-                    c_threshold_v_max = 255;
+                    c_threshold_h_min = 5;
+                    c_threshold_h_max = 130;
+                    c_threshold_s_min = 20;
+                    c_threshold_s_max = 170;
+                    c_threshold_v_min = 20;
+                    c_threshold_v_max = 115;
                     c_remove_blobs_min = 1;
                     c_remove_blobs_max = 500;
                     break;
                 case(TresholdConditions.OVERBELICHT):
-                    c_threshold_h_min = 21;
-                    c_threshold_h_max = 70;
-                    c_threshold_s_min = 100;
-                    c_threshold_s_max = 255;
-                    c_threshold_v_min = 100;
+                    c_threshold_h_min = 0;
+                    c_threshold_h_max = 241;
+                    c_threshold_s_min = 0;
+                    c_threshold_s_max = 16;
+                    c_threshold_v_min = 249;
                     c_threshold_v_max = 255;
                     c_remove_blobs_min = 1;
                     c_remove_blobs_max = 500;
@@ -109,7 +109,7 @@ namespace LicPlate
 
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 0, 5);
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_AreaHoles, 0, 200);
-            //VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 20, 1000);
+            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 20, 1000);
 
             //Convert back to a 16 bit format
             VisionLab.Convert(binaryPlateImage32, binaryPlateImage);

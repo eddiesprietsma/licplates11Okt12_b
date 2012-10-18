@@ -224,7 +224,9 @@ namespace LicPlate
             //** Find plate **//
             //****************//
             Int16Image binaryPlateImage = new Int16Image();
-            if (!LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.NORMAAL))
+            if (!LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.NORMAAL) 
+                && !LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.ONDERBELICHT) 
+                && !LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.OVERBELICHT))
             {
                 DisplayImage(binaryPlateImage, imgPlateBin, true, true);
                 lblLexiconResult.Text = "";
