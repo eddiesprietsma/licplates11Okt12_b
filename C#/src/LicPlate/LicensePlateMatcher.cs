@@ -155,11 +155,20 @@ namespace LicPlate
             XYCoord leftBottom = new XYCoord();
             XYCoord rightBottom = new XYCoord();
 
-
             //Find licenseplate
             Int32Image binaryPlateImage32 = new Int32Image();
             VisionLab.Convert(binaryPlateImage, binaryPlateImage32);
-            VisionLab.FindCornersRectangle(binaryPlateImage32, Connected.EightConnected, 0.5, Orientation.Landscape, leftTop, rightTop, leftBottom, rightBottom);
+            VisionLab.FindCornersRectangle(
+                binaryPlateImage32, 
+                Connected.EightConnected, 
+                0.5, 
+                Orientation.Landscape, 
+                leftTop, 
+                rightTop, 
+                leftBottom, 
+                rightBottom
+            );
+
             binaryPlateImage32.Dispose();
 
             Int16Image plateImageGray = new Int16Image();
@@ -169,12 +178,48 @@ namespace LicPlate
             try
             {
                 //Rectify plate
-                VisionLab.Warp(plateImageGray, binaryCharacterImage, TransformDirection.ForwardT, new Coord2D(leftTop), new Coord2D(rightTop), new Coord2D(leftBottom), new Coord2D(rightBottom), c_height, c_width, 0);
+                VisionLab.Warp(
+                    plateImageGray, 
+                    binaryCharacterImage, 
+                    TransformDirection.ForwardT, 
+                    new Coord2D(leftTop), 
+                    new Coord2D(rightTop), 
+                    new Coord2D(leftBottom), 
+                    new Coord2D(rightBottom), 
+                    c_height, 
+                    c_width, 
+                    0
+                );
             }
             catch (Exception )
             {
+                VisionLab.FindCornersRectangleSq(
+                    binaryPlateImage32,
+                    Connected.EightConnected,
+                    leftTop,
+                    rightTop,
+                    leftBottom,
+                    rightBottom
+                );
                 //Warp, 3 coords on one line
-                return false;
+                try
+                {
+                    VisionLab.Warp(plateImageGray,
+                        binaryCharacterImage,
+                        TransformDirection.ForwardT,
+                        new Coord2D(leftTop),
+                        new Coord2D(rightTop),
+                        new Coord2D(leftBottom),
+                        new Coord2D(rightBottom),
+                        c_height,
+                        c_width,
+                        0
+                    );
+                }
+                catch (Exception)
+                {
+                    return false;
+                }                
             }
             plateImageGray.Dispose();
 
