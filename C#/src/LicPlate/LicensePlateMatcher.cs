@@ -150,6 +150,14 @@ namespace LicPlate
             const int c_remove_blobs_min = 1;
             const int c_remove_blobs_max = 400;
 
+            //const int c_threshold_h_min = 21;
+            //const int c_threshold_h_max = 70;
+            //const int c_threshold_s_min = 100;
+            //const int c_threshold_s_max = 255;
+            //const int c_threshold_v_min = 100;
+            //const int c_threshold_v_max = 255;
+
+
             XYCoord leftTop = new XYCoord();
             XYCoord rightTop = new XYCoord();
             XYCoord leftBottom = new XYCoord();
@@ -228,6 +236,7 @@ namespace LicPlate
                     return false;
                 }                
             }
+
             plateImageGray.Dispose();
 
             //*******************************//
@@ -235,6 +244,25 @@ namespace LicPlate
             //**   adjust licenseplate     **//
             //**   segmentation            **//
             //*******************************//
+            Int16Image MaxMin = new Int16Image();
+            Int16Image MaxMin2 = new Int16Image();
+            
+
+            //2 x max rondje ding
+            //dan 2 x min rondje ding
+            //dan van elkaar aftrekken
+            //(zoeken op heldere object)
+            Mask_Int32 mask = new Mask_Int32(11, 11, 5, 5);
+            VisionLab.MaximumFilter(binaryCharacterImage, MaxMin, FixEdge.EdgeExtend, mask);
+            VisionLab.MaximumFilter(MaxMin, MaxMin2, FixEdge.EdgeExtend, mask);
+
+            VisionLab.MinimumFilter(MaxMin2, MaxMin, FixEdge.EdgeExtend, mask);
+            VisionLab.MinimumFilter(MaxMin, MaxMin2, FixEdge.EdgeExtend, mask);
+            // Maxmin holds the result now of the filter oparations
+            VisionLab.Subtract(binaryCharacterImage, MaxMin2);
+
+            MaxMin2.Dispose();
+            MaxMin.Dispose();
 
             //Find dark text on bright licenseplate using ThresholdISOData
             VisionLab.ThresholdIsoData(binaryCharacterImage, ObjectBrightness.DarkObject);
