@@ -269,8 +269,10 @@ namespace LicPlate
 
             //Convert to a 32 bit format 
             Int32Image binaryCharacterImage32 = new Int32Image();
+            //Int32Image binCharImg32 = new Int32Image();
             VisionLab.Convert(binaryCharacterImage, binaryCharacterImage32);
-            
+            //VisionLab.Closing(binCharImg32,binaryPlateImage32, new m
+
             //Remove blobs connected to the border
             VisionLab.RemoveBorderBlobs(binaryCharacterImage32, Connected.EightConnected, Border.AllBorders);
             //Remove small blobs
