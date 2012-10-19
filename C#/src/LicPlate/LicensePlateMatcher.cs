@@ -155,9 +155,15 @@ namespace LicPlate
             XYCoord leftBottom = new XYCoord();
             XYCoord rightBottom = new XYCoord();
 
+            XYCoord leftTop2 = new XYCoord();
+            XYCoord rightTop2 = new XYCoord();
+            XYCoord leftBottom2 = new XYCoord();
+            XYCoord rightBottom2 = new XYCoord();
+
             //Find licenseplate
             Int32Image binaryPlateImage32 = new Int32Image();
             VisionLab.Convert(binaryPlateImage, binaryPlateImage32);
+            
             VisionLab.FindCornersRectangle(
                 binaryPlateImage32, 
                 Connected.EightConnected, 
@@ -168,6 +174,15 @@ namespace LicPlate
                 leftBottom, 
                 rightBottom
             );
+
+            VisionLab.FindCornersRectangleSq(
+                    binaryPlateImage32,
+                    Connected.EightConnected,
+                    leftTop2,
+                    rightTop2,
+                    leftBottom2,
+                    rightBottom2
+                );
 
             binaryPlateImage32.Dispose();
 
@@ -193,24 +208,16 @@ namespace LicPlate
             }
             catch (Exception )
             {
-                VisionLab.FindCornersRectangleSq(
-                    binaryPlateImage32,
-                    Connected.EightConnected,
-                    leftTop,
-                    rightTop,
-                    leftBottom,
-                    rightBottom
-                );
                 //Warp, 3 coords on one line
                 try
                 {
                     VisionLab.Warp(plateImageGray,
                         binaryCharacterImage,
                         TransformDirection.ForwardT,
-                        new Coord2D(leftTop),
-                        new Coord2D(rightTop),
-                        new Coord2D(leftBottom),
-                        new Coord2D(rightBottom),
+                        new Coord2D(leftTop2),
+                        new Coord2D(rightTop2),
+                        new Coord2D(leftBottom2),
+                        new Coord2D(rightBottom2),
                         c_height,
                         c_width,
                         0
