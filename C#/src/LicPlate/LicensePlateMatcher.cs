@@ -109,7 +109,7 @@ namespace LicPlate
 
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 0, 5);
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_AreaHoles, 0, 200);
-            VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 20, 1000);
+            //VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 20, 1000);
 
             //Convert back to a 16 bit format
             VisionLab.Convert(binaryPlateImage32, binaryPlateImage);

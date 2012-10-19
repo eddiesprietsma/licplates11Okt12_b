@@ -224,16 +224,10 @@ namespace LicPlate
             //** Find plate **//
             //****************//
             Int16Image binaryPlateImage = new Int16Image();
-<<<<<<< HEAD
+
             if (!LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.NORMAAL) 
-                && !LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.ONDERBELICHT) 
-                && !LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.OVERBELICHT))
-=======
-            // Check all if any of the treshold values can find our license plate
-            if (!(LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.NORMAAL) ||
-                  LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.OVERBELICHT) ||
-                  LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.ONDERBELICHT)))
->>>>>>> 0013742795673e2ff4e2626b10fac7ca5396a179
+                && !LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.OVERBELICHT)
+                && !LicensePlateMatcher.FindPlate(plateImage, ref binaryPlateImage, TresholdConditions.ONDERBELICHT))
             {
                 DisplayImage(binaryPlateImage, imgPlateBin, true, true);
                 lblLexiconResult.Text = "";
