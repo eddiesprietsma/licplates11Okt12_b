@@ -323,7 +323,7 @@ namespace LicPlate
 
             //Create data structure for lexicon.
             vector_vector_LetterMatch match = new vector_vector_LetterMatch();
-            
+            matcher.ChangeParams(60, 10, 64, 0);
             //Process each character/blob.
             foreach (Blob b in returnBlobs)
             {
