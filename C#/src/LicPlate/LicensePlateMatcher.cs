@@ -337,6 +337,8 @@ namespace LicPlate
                 vector_PatternMatchResult returnMatches = new vector_PatternMatchResult();
                 float conf = matcher.AllMatches(binaryCharacter, (float)-0.5, (float)0.5, returnMatches);
                 float err = returnMatches[0].error;
+                if(err > 0.20f)
+                    conf -= 0.1f;
                 int id = returnMatches[0].id;
                 string chr = matcher.PatternName(id);
                 
