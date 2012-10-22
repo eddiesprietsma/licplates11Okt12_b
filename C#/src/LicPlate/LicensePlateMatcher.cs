@@ -65,16 +65,6 @@ namespace LicPlate
                     c_remove_blobs_max = 500;
                     break;
             }
-            //const int c_threshold_h_min = 21;
-            //const int c_threshold_h_max = 70;
-            //const int c_threshold_s_min = 100;
-            //const int c_threshold_s_max = 255;
-            //const int c_threshold_v_min = 100;
-            //const int c_threshold_v_max = 255;
-            //const int c_remove_blobs_min = 1;
-            //const int c_remove_blobs_max = 500;
-            
-
 
             //*******************************//
             //** Exercise:                 **//
@@ -93,9 +83,6 @@ namespace LicPlate
             //Convert to a 32 bit format 
             Int32Image binaryPlateImage32 = new Int32Image();
             VisionLab.Convert(binaryPlateImage, binaryPlateImage32);
-
-            //Int32Image binPlateImage32 = new Int32Image();
-            //.Opening(binaryPlateImage32, binPlateImage32, new Mask_Int32(10, 10, 1));
            
             //Remove blobs with small areas
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_Area, c_remove_blobs_min, c_remove_blobs_max);
@@ -148,15 +135,7 @@ namespace LicPlate
             const int c_height = 100;
             const int c_width = 470;
             const int c_remove_blobs_min = 1;
-            const int c_remove_blobs_max = 400;
-
-            //const int c_threshold_h_min = 21;
-            //const int c_threshold_h_max = 70;
-            //const int c_threshold_s_min = 100;
-            //const int c_threshold_s_max = 255;
-            //const int c_threshold_v_min = 100;
-            //const int c_threshold_v_max = 255;
-
+            const int c_remove_blobs_max = 400
 
             XYCoord leftTop = new XYCoord();
             XYCoord rightTop = new XYCoord();
@@ -258,7 +237,8 @@ namespace LicPlate
 
             VisionLab.MinimumFilter(MaxMin2, MaxMin, FixEdge.EdgeExtend, mask);
             VisionLab.MinimumFilter(MaxMin, MaxMin2, FixEdge.EdgeExtend, mask);
-            // Maxmin holds the result now of the filter oparations
+            // Maxmin2 holds the result now of the filter oparations
+            // Get the difference between both
             VisionLab.Subtract(binaryCharacterImage, MaxMin2);
 
             MaxMin2.Dispose();
@@ -267,12 +247,17 @@ namespace LicPlate
             //Find dark text on bright licenseplate using ThresholdISOData
             VisionLab.ThresholdIsoData(binaryCharacterImage, ObjectBrightness.DarkObject);
 
+            Int16Image bin = new Int16Image();
+            // Recreate images that are corralated / deformed
+            VisionLab.Opening(binaryCharacterImage, bin, new Mask_Int32(2, 2, 1));
+            
+            
             //Convert to a 32 bit format 
             Int32Image binaryCharacterImage32 = new Int32Image();
             //Int32Image binCharImg32 = new Int32Image();
-            VisionLab.Convert(binaryCharacterImage, binaryCharacterImage32);
+            VisionLab.Convert(bin, binaryCharacterImage32);
             //VisionLab.Closing(binCharImg32,binaryPlateImage32, new m
-
+            bin.Dispose();
             //Remove blobs connected to the border
             VisionLab.RemoveBorderBlobs(binaryCharacterImage32, Connected.EightConnected, Border.AllBorders);
             //Remove small blobs
@@ -341,7 +326,7 @@ namespace LicPlate
                     conf -= 0.1f;
                 int id = returnMatches[0].id;
                 string chr = matcher.PatternName(id);
-                
+
                 //Fill datastructure for lexicon.
                 match.Add(VisionLabEx.PatternMatchResultToLetterMatch(returnMatches));
                 
