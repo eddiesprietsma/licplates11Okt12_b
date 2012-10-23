@@ -135,7 +135,7 @@ namespace LicPlate
             const int c_height = 100;
             const int c_width = 470;
             const int c_remove_blobs_min = 1;
-            const int c_remove_blobs_max = 400
+            const int c_remove_blobs_max = 400;
 
             XYCoord leftTop = new XYCoord();
             XYCoord rightTop = new XYCoord();
@@ -331,7 +331,7 @@ namespace LicPlate
                 match.Add(VisionLabEx.PatternMatchResultToLetterMatch(returnMatches));
                 
                 //Store best match in result
-                result.characters.Add(new LicenseCharacter(chr, err, conf));
+                result.characters.Add(new LicenseCharacter(chr, err, conf, b.TopLeft().x, returnMatches));
             }
 
             //Validate match with lexicon.
@@ -344,6 +344,7 @@ namespace LicPlate
                 lexiconResult.characters.Add(new LicenseCharacter(character));
             }
 
+            result.CalculateBestMatch(matcher);
             binaryCharacter.Dispose();
             returnBlobs.Dispose();
             match.Dispose();
