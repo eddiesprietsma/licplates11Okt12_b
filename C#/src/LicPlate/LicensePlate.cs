@@ -104,8 +104,16 @@ namespace LicPlate
                 }
             }
 
+            if (pos1 > pos2)
+            {
+                int temp = pos1;
+                pos1 = pos2;
+                pos2 = temp;
+            }
+
         }
-        private enum kenType { NUMBER, CHAR, DONTKNOW };
+
+        private enum kenType { DONTKNOW, NUMBER, CHAR };
 
         public void CalculateBestMatch(BlobMatcher_Int16 matcher)
         {
@@ -113,17 +121,28 @@ namespace LicPlate
             kenType[] partsNum = new kenType[3];
             int partNumPlace = 0;
 
-            if (pos2 - pos1 < 2)
+            // The difference is to small
+            // must be wrong so stop this algoritm
+            if (pos2 - pos1 < 2 ||
+              !((pos1 == 1 && pos2 == 4) || 
+               (pos1 == 2 && (pos2 == 5 || pos2 == 4))
+               ))
                 return;
-            
+            Console.WriteLine(pos1 + " " + pos2);
+
             // Build the expected partern
+            double err = double.MaxValue;
             for (int i = 0; i < chars.Count; i++)
             {
                 if (i == pos1 || i == pos2)
-                    partNumPlace += 1;
-
-                if (chars[i].error <= 0.13)// && chars[i].confidence > 0.40)
                 {
+                    partNumPlace += 1;
+                    err = double.MaxValue;
+                }
+
+                if (chars[i].error <= 0.13 && chars[i].error < err)// && chars[i].confidence > 0.40)
+                {
+                    err = chars[i].error;
                     // Sure enough about this char to use if to determine if part is num or not
                     if (Char.IsNumber(chars[i].character[0]))
                     {
@@ -135,12 +154,67 @@ namespace LicPlate
                     }
 
                 }
-                else
-                    partsNum[partNumPlace] = kenType.DONTKNOW;
             }
 
+            if ((partsNum[0] == kenType.NUMBER && partsNum[1] == kenType.NUMBER) ||
+                (partsNum[1] == kenType.NUMBER && partsNum[2] == kenType.NUMBER))
+                return;
+
+            bool matched = true;
+            foreach (kenType abc in partsNum)
+            {
+                if (abc == kenType.DONTKNOW)
+                    matched = false;
+            }
+
+
+            if (!matched)
+            {
+                // moet altijd cijfers chars cijfers zijn
+                if ((pos1 == 1 && pos2 == 4) ||
+                    (pos1 == 2 && pos2 == 5))
+                {
+                    Console.WriteLine("Changed em!");
+                    partsNum[0] = kenType.NUMBER;
+                    partsNum[1] = kenType.CHAR;
+                    partsNum[2] = kenType.NUMBER;
+                }
+                else // Dan hebben we nog de andere mogelijkheden
+                {
+                    if (partsNum[0] == kenType.NUMBER)
+                    {
+                        partsNum[1] = kenType.CHAR;
+                        partsNum[2] = kenType.CHAR;
+                    }
+                    else if (partsNum[1] == kenType.NUMBER)
+                    {
+                        partsNum[0] = kenType.CHAR;
+                        partsNum[2] = kenType.CHAR;
+                    }
+                    else if (partsNum[2] == kenType.NUMBER)
+                    {
+                        partsNum[0] = kenType.CHAR;
+                        partsNum[1] = kenType.CHAR;
+
+                    }
+                    else if (partsNum[0] == kenType.CHAR && partsNum[1] == kenType.CHAR)
+                        partsNum[2] = kenType.NUMBER;
+                    else if (partsNum[0] == kenType.CHAR && partsNum[2] == kenType.CHAR)
+                        partsNum[1] = kenType.NUMBER;
+                    else if (partsNum[1] == kenType.CHAR && partsNum[2] == kenType.CHAR)
+                        partsNum[0] = kenType.NUMBER;
+
+                }
+            }
+
+
+            string s = "";
+            foreach (kenType abc in partsNum)
+                s += abc.ToString() + " ";
+            Console.WriteLine(s);
+
             partNumPlace = 0;
-            for (int i = 1; i < chars.Count - 1; i++)//LicenseCharacter LicChar in chars)
+            for (int i = 1; i < chars.Count; i++)//LicenseCharacter LicChar in chars)
             {
                 if (i == pos1 || i == pos2)
                     partNumPlace += 1;
@@ -159,11 +233,17 @@ namespace LicPlate
                                 break;
                             }
                     }
-                    else if(chars[i].error > 0.11 && chars[i].error < 0.20 &&
-                        !Char.IsNumber(matcher.PatternName(chars[i].PatternResults[1].id)[0]))
+                    else if (chars[i].error > 0.11 && chars[i].error < 0.20)
                     {
-                        // Is a number and second match isn't so throw up confidence
-                        chars[i] = new LicenseCharacter(chars[i].character, -0.02, 41);
+                        if (!Char.IsNumber(matcher.PatternName(chars[i].PatternResults[1].id)[0]))
+                        {
+                            // Is a number and second match isn't so throw up confidence
+                            chars[i] = new LicenseCharacter(chars[i].character, -0.02, 41);
+                        }
+                        else if (!Char.IsNumber(matcher.PatternName(chars[i].PatternResults[2].id)[0]))
+                        {
+                            chars[i] = new LicenseCharacter(chars[i].character, -0.01, chars[i].confidence + 0.1);
+                        }
                     }
                 }
                 else if (partsNum[partNumPlace] == kenType.CHAR && chars[i].error < 0.20)
@@ -180,11 +260,17 @@ namespace LicPlate
                                 break;
                             }
                     }
-                    else if(chars[i].error > 0.11 && chars[i].error < 0.20 &&
-                        Char.IsNumber(matcher.PatternName(chars[i].PatternResults[1].id)[0]))
+                    else if (chars[i].error > 0.11 && chars[i].error < 0.20)
                     {
-                        // Is a number and second match isn't so throw up confidence
-                        chars[i] = new LicenseCharacter(chars[i].character, -0.02, 41);
+                        if (Char.IsNumber(matcher.PatternName(chars[i].PatternResults[1].id)[0]))
+                        {
+                            // Is a number and second match isn't so throw up confidence
+                            chars[i] = new LicenseCharacter(chars[i].character, -0.02, 41);
+                        }
+                        else if (Char.IsNumber(matcher.PatternName(chars[i].PatternResults[2].id)[0]))
+                        {
+                            chars[i] = new LicenseCharacter(chars[i].character, -0.01, chars[i].confidence + 0.1);
+                        }
                     }
                 }
             }
