@@ -86,6 +86,10 @@ namespace LicPlate
                 previous = chars[i];
             }
 
+            Console.WriteLine(difference[0] + " " + difference[1] + " " + difference[2] + " " +
+                difference[3] + " " +
+                difference[4] + " ");
+
             int valuePos1 = 0;
             int valuePos2 = 0;
             for(int a = 0; a < difference.Length; a++)// in difference)
@@ -110,7 +114,7 @@ namespace LicPlate
                 pos1 = pos2;
                 pos2 = temp;
             }
-
+            Console.WriteLine(pos1 + " " + pos2); 
         }
 
         private enum kenType { DONTKNOW, NUMBER, CHAR };
@@ -160,6 +164,15 @@ namespace LicPlate
                 (partsNum[1] == kenType.NUMBER && partsNum[2] == kenType.NUMBER))
                 return;
 
+            if ((pos1 == 1 && pos2 == 4) ||
+                    (pos1 == 2 && pos2 == 5))
+            {
+                Console.WriteLine("Changed em!");
+                partsNum[0] = kenType.NUMBER;
+                partsNum[1] = kenType.CHAR;
+                partsNum[2] = kenType.NUMBER;
+            }
+
             bool matched = true;
             foreach (kenType abc in partsNum)
             {
@@ -171,40 +184,33 @@ namespace LicPlate
             if (!matched)
             {
                 // moet altijd cijfers chars cijfers zijn
-                if ((pos1 == 1 && pos2 == 4) ||
-                    (pos1 == 2 && pos2 == 5))
+                
+                // Dan hebben we nog de andere mogelijkheden
+                
+                if (partsNum[0] == kenType.NUMBER)
                 {
-                    Console.WriteLine("Changed em!");
-                    partsNum[0] = kenType.NUMBER;
                     partsNum[1] = kenType.CHAR;
-                    partsNum[2] = kenType.NUMBER;
+                    partsNum[2] = kenType.CHAR;
                 }
-                else // Dan hebben we nog de andere mogelijkheden
+                else if (partsNum[1] == kenType.NUMBER)
                 {
-                    if (partsNum[0] == kenType.NUMBER)
-                    {
-                        partsNum[1] = kenType.CHAR;
-                        partsNum[2] = kenType.CHAR;
-                    }
-                    else if (partsNum[1] == kenType.NUMBER)
-                    {
-                        partsNum[0] = kenType.CHAR;
-                        partsNum[2] = kenType.CHAR;
-                    }
-                    else if (partsNum[2] == kenType.NUMBER)
-                    {
-                        partsNum[0] = kenType.CHAR;
-                        partsNum[1] = kenType.CHAR;
-
-                    }
-                    else if (partsNum[0] == kenType.CHAR && partsNum[1] == kenType.CHAR)
-                        partsNum[2] = kenType.NUMBER;
-                    else if (partsNum[0] == kenType.CHAR && partsNum[2] == kenType.CHAR)
-                        partsNum[1] = kenType.NUMBER;
-                    else if (partsNum[1] == kenType.CHAR && partsNum[2] == kenType.CHAR)
-                        partsNum[0] = kenType.NUMBER;
+                    partsNum[0] = kenType.CHAR;
+                    partsNum[2] = kenType.CHAR;
+                }
+                else if (partsNum[2] == kenType.NUMBER)
+                {
+                    partsNum[0] = kenType.CHAR;
+                    partsNum[1] = kenType.CHAR;
 
                 }
+                else if (partsNum[0] == kenType.CHAR && partsNum[1] == kenType.CHAR)
+                    partsNum[2] = kenType.NUMBER;
+                else if (partsNum[0] == kenType.CHAR && partsNum[2] == kenType.CHAR)
+                    partsNum[1] = kenType.NUMBER;
+                else if (partsNum[1] == kenType.CHAR && partsNum[2] == kenType.CHAR)
+                    partsNum[0] = kenType.NUMBER;
+
+                
             }
 
 
@@ -214,7 +220,7 @@ namespace LicPlate
             Console.WriteLine(s);
 
             partNumPlace = 0;
-            for (int i = 1; i < chars.Count; i++)//LicenseCharacter LicChar in chars)
+            for (int i = 0; i < chars.Count; i++)//LicenseCharacter LicChar in chars)
             {
                 if (i == pos1 || i == pos2)
                     partNumPlace += 1;
