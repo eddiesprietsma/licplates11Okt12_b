@@ -331,7 +331,13 @@ namespace LicPlate
                 match.Add(VisionLabEx.PatternMatchResultToLetterMatch(returnMatches));
                 
                 //Store best match in result
-                result.characters.Add(new LicenseCharacter(chr, err, conf, b.TopLeft().x, returnMatches));
+                result.characters.Add(
+                    new LicenseCharacter(chr, 
+                        err, 
+                        conf, 
+                        b.TopLeft().x + ((b.TopRight().x - b.TopLeft().x)/2) , 
+                        returnMatches
+                        ));
             }
 
             //Validate match with lexicon.
