@@ -303,7 +303,7 @@ namespace LicPlate
             //*****************//
             LicensePlate result = new LicensePlate();
             LicensePlate lexiconResult = new LicensePlate();
-            if (!LicensePlateMatcher.MatchPlate(binaryRectifiedImage, blobMatcher, lexicon, ref result, ref lexiconResult))
+            if (!LicensePlateMatcher.MatchPlate(binaryRectifiedImage, blobMatcher, lexicon, ref result, ref lexiconResult, false))
             {
                 lblLexiconResult.Text = "";
                 if (add)
@@ -314,6 +314,11 @@ namespace LicPlate
                 ClearResultLabels();
                 return;
             }            
+            // Extra way to up confidence perhaps
+            if(result.characters != null && result.confidence < (double)nupConfidence.Value / 100)
+            {
+                LicensePlateMatcher.MatchPlate(binaryRectifiedImage, blobMatcher, lexicon, ref result, ref lexiconResult, true);
+            }
 
             //*********************//
             //** Process results **//

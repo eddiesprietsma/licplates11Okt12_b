@@ -295,8 +295,16 @@ namespace LicPlate
 	            //six characters found
 	        bool 
         */
-        public static bool MatchPlate(Int16Image binaryCharacterImage, BlobMatcher_Int16 matcher, ClassLexicon lexicon, ref LicensePlate result, ref LicensePlate lexiconResult)
+        public static bool MatchPlate(Int16Image binaryCharacterImage, BlobMatcher_Int16 matcher, 
+            ClassLexicon lexicon, ref LicensePlate result, ref LicensePlate lexiconResult, bool dilate)
         {
+            if (dilate)
+            {
+                Int16Image temp = new Int16Image();
+                VisionLab.Dilation(binaryCharacterImage, temp, new Mask_Int32(3, 3, 1));
+                binaryCharacterImage = new Int16Image(temp);
+                temp.Dispose();
+            }
             if (VisionLab.LabelBlobs(binaryCharacterImage, Connected.EightConnected) != 6)
                 return false;
 
