@@ -245,8 +245,43 @@ namespace LicPlate
             //** Rectify plate **//
             //*******************//                       
             Int16Image binaryRectifiedImage = new Int16Image();
-            if (!LicensePlateMatcher.FindCharacters(plateImage, binaryPlateImage, ref binaryRectifiedImage))
+
+            do
             {
+                // Check if we can find the plate
+                if (LicensePlateMatcher.FindCharacters(plateImage, binaryPlateImage, ref binaryRectifiedImage))
+                {
+                    // if so we are done
+                    break;
+                }
+                else
+                {
+                    // ************************************
+                    // **  Find the biggest blob in the  **
+                    // **  image and remove that one     **
+                    // ************************************
+                    VisionLab.LabelBlobs(binaryPlateImage, Connected.EightConnected);
+                    vector_BlobAnalyse ba_vec = new vector_BlobAnalyse();
+                    ba_vec.Add(BlobAnalyse.BA_Area);
+                    vector_Blob blobs = new vector_Blob();
+                    VisionLab.BlobAnalysis(binaryPlateImage, VisionLab.VectorToSet_BlobAnalyse(ba_vec), VisionLab.MaxPixel(binaryPlateImage), blobs);
+                    int biggestArea = 0;
+                    foreach (Blob ba in blobs)
+                    {
+                        if (ba.Area() > biggestArea)
+                        {
+                            biggestArea = ba.Area();
+                        }
+                    }
+                    VisionLab.RemoveBlobs(binaryPlateImage, Connected.EightConnected, BlobAnalyse.BA_Area, biggestArea - 1, biggestArea + 1);
+                }
+            } // Repeat this until there is nothing left
+            while (VisionLab.SumIntPixels(binaryPlateImage) > 0);
+
+            // If that is so it wasn't found
+            if (VisionLab.SumIntPixels(binaryPlateImage) == 0)
+            {
+                // So do all this
                 if (imgRectifiedPlate.Image != null)
                     imgRectifiedPlate.Image.Dispose();
                 imgRectifiedPlate.Image = null;
@@ -259,6 +294,7 @@ namespace LicPlate
                 ClearResultLabels();
                 return;
             }
+
             DisplayImage(binaryRectifiedImage, imgRectifiedPlate, true, true);
             
 

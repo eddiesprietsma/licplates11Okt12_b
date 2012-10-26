@@ -94,9 +94,10 @@ namespace LicPlate
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 0, 2.5);
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_LengthBreadthRatio, 6.7, 10);
 
+            // Remove blobs that have to less holes
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 0, 5);
+            // And remove blobs that have a to small area for the holes
             VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_AreaHoles, 0, 200);
-            //VisionLab.RemoveBlobs(binaryPlateImage32, Connected.EightConnected, BlobAnalyse.BA_NrOfHoles, 20, 1000);
 
             //Convert back to a 16 bit format
             VisionLab.Convert(binaryPlateImage32, binaryPlateImage);
@@ -256,7 +257,6 @@ namespace LicPlate
             Int32Image binaryCharacterImage32 = new Int32Image();
             //Int32Image binCharImg32 = new Int32Image();
             VisionLab.Convert(bin, binaryCharacterImage32);
-            //VisionLab.Closing(binCharImg32,binaryPlateImage32, new m
             bin.Dispose();
             //Remove blobs connected to the border
             VisionLab.RemoveBorderBlobs(binaryCharacterImage32, Connected.EightConnected, Border.AllBorders);
@@ -272,6 +272,9 @@ namespace LicPlate
             leftBottom.Dispose();
             rightBottom.Dispose();
             GC.Collect();
+            //Check if 6 characters/blobs have been found and label image.
+            if (VisionLab.LabelBlobs(binaryCharacterImage, Connected.EightConnected) != 6)
+                return false;
             return true;
         }
 
@@ -294,7 +297,6 @@ namespace LicPlate
         */
         public static bool MatchPlate(Int16Image binaryCharacterImage, BlobMatcher_Int16 matcher, ClassLexicon lexicon, ref LicensePlate result, ref LicensePlate lexiconResult)
         {
-            //Check if 6 characters/blobs have been found and label image.
             if (VisionLab.LabelBlobs(binaryCharacterImage, Connected.EightConnected) != 6)
                 return false;
 
@@ -310,6 +312,7 @@ namespace LicPlate
 
             //Create data structure for lexicon.
             vector_vector_LetterMatch match = new vector_vector_LetterMatch();
+            // Change the matcher params
             matcher.ChangeParams(60, 10, 64, 0);
             //Process each character/blob.
             foreach (Blob b in returnBlobs)
@@ -322,20 +325,25 @@ namespace LicPlate
                 vector_PatternMatchResult returnMatches = new vector_PatternMatchResult();
                 float conf = matcher.AllMatches(binaryCharacter, (float)-0.5, (float)0.5, returnMatches);
                 float err = returnMatches[0].error;
-                if(err > 0.20f)
-                    conf -= 0.2f;
                 int id = returnMatches[0].id;
                 string chr = matcher.PatternName(id);
-
+                // If error to big decrease the confidence
+                if(err > 0.20f)
+                    conf -= 0.2f;
                 //Fill datastructure for lexicon.
                 match.Add(VisionLabEx.PatternMatchResultToLetterMatch(returnMatches));
                 
                 //Store best match in result
                 result.characters.Add(
-                    new LicenseCharacter(chr, 
+                    new LicenseCharacter(
+                        chr, 
                         err, 
-                        conf, 
+                        conf,
+                        // Extra param: The middle of a character
+                        // (used for matching patterns)
                         b.TopLeft().x + ((b.TopRight().x - b.TopLeft().x)/2) , 
+                        // All other results that we're found
+                        // So we can switch between em
                         returnMatches
                         ));
             }
@@ -350,7 +358,9 @@ namespace LicPlate
                 lexiconResult.characters.Add(new LicenseCharacter(character));
             }
 
+            // Create the best match with the aid of the pattern matcher
             result.CalculateBestMatch(matcher);
+            
             binaryCharacter.Dispose();
             returnBlobs.Dispose();
             match.Dispose();
