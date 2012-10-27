@@ -30,7 +30,7 @@ namespace LicPlate
             int c_threshold_v_min = 0;
             int c_threshold_v_max = 0;
             int c_remove_blobs_min = 0;
-            int c_remove_blobs_max = 0;
+            int c_remove_blobs_max = 500;
             
             switch(state)
             {
@@ -41,8 +41,6 @@ namespace LicPlate
                     c_threshold_s_max = 255;
                     c_threshold_v_min = 100;
                     c_threshold_v_max = 255;
-                    c_remove_blobs_min = 1;
-                    c_remove_blobs_max = 500;
                     break;
                 case(TresholdConditions.ONDERBELICHT):
                     c_threshold_h_min = 5;
@@ -51,8 +49,6 @@ namespace LicPlate
                     c_threshold_s_max = 170;
                     c_threshold_v_min = 20;
                     c_threshold_v_max = 115;
-                    c_remove_blobs_min = 1;
-                    c_remove_blobs_max = 500;
                     break;
                 case(TresholdConditions.OVERBELICHT):
                     c_threshold_h_min = 0;
@@ -61,8 +57,6 @@ namespace LicPlate
                     c_threshold_s_max = 16;
                     c_threshold_v_min = 249;
                     c_threshold_v_max = 255;
-                    c_remove_blobs_min = 1;
-                    c_remove_blobs_max = 500;
                     break;
             }
 
@@ -135,7 +129,7 @@ namespace LicPlate
             //Constants
             const int c_height = 100;
             const int c_width = 470;
-            const int c_remove_blobs_min = 1;
+            const int c_remove_blobs_min = 0;
             const int c_remove_blobs_max = 400;
 
             XYCoord leftTop = new XYCoord();
