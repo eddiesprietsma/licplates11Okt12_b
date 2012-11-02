@@ -43,18 +43,18 @@ namespace LicPlate
                     c_threshold_v_max = 255;
                     break;
                 case(TresholdConditions.ONDERBELICHT):
-                    c_threshold_h_min = 5;
-                    c_threshold_h_max = 130;
-                    c_threshold_s_min = 20;
-                    c_threshold_s_max = 170;
-                    c_threshold_v_min = 20;
-                    c_threshold_v_max = 115;
+                    c_threshold_h_min = 11;
+                    c_threshold_h_max = 119;
+                    c_threshold_s_min = 23;
+                    c_threshold_s_max = 255;
+                    c_threshold_v_min = 56;
+                    c_threshold_v_max = 176;
                     break;
                 case(TresholdConditions.OVERBELICHT):
                     c_threshold_h_min = 0;
                     c_threshold_h_max = 241;
-                    c_threshold_s_min = 0;
-                    c_threshold_s_max = 16;
+                    c_threshold_s_min = 29;
+                    c_threshold_s_max = 241;
                     c_threshold_v_min = 249;
                     c_threshold_v_max = 255;
                     break;
