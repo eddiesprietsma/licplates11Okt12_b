@@ -192,8 +192,6 @@ namespace LicPlate
         /// </summary>
         /// <param name="pos1">The position of the first stripe</param>
         /// <param name="pos2">The position of the second stripe</param>
-        /// <param name="partsNum">An array (empty) which will be filled with the 
-        /// expected pattern</param
         private kenType[] createpattern(int pos1, int pos2)
         {
             kenType[] partsNum = new kenType[3];
