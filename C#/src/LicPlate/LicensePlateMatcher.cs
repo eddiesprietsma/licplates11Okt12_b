@@ -137,6 +137,8 @@ namespace LicPlate
             XYCoord leftBottom = new XYCoord();
             XYCoord rightBottom = new XYCoord();
 
+            // 2de set coordinaten:
+            // NIEUW
             XYCoord leftTop2 = new XYCoord();
             XYCoord rightTop2 = new XYCoord();
             XYCoord leftBottom2 = new XYCoord();
@@ -157,6 +159,8 @@ namespace LicPlate
                 rightBottom
             );
 
+            // NIEUW
+            // Coordinaten bepalen voor deze functie
             VisionLab.FindCornersRectangleSq(
                     binaryPlateImage32,
                     Connected.EightConnected,
@@ -172,6 +176,8 @@ namespace LicPlate
 
             VisionLab.Convert(plateImage, plateImageGray);
             binaryCharacterImage.Assign_Op(plateImageGray);
+            
+            // Eerst de standaard wrap proberen
             try
             {
                 //Rectify plate
@@ -190,7 +196,8 @@ namespace LicPlate
             }
             catch (Exception )
             {
-                //Warp, 3 coords on one line
+                // NIEUW
+                // Als dat mislukt dan de andere gebruiken
                 try
                 {
                     VisionLab.Warp(plateImageGray,
@@ -218,10 +225,11 @@ namespace LicPlate
             //**   adjust licenseplate     **//
             //**   segmentation            **//
             //*******************************//
+            // NIEUW
             Int16Image MaxMin = new Int16Image();
             Int16Image MaxMin2 = new Int16Image();
-            
 
+            // NIEUW
             //2 x max rondje ding
             //dan 2 x min rondje ding
             //dan van elkaar aftrekken
@@ -243,18 +251,20 @@ namespace LicPlate
             VisionLab.ThresholdIsoData(binaryCharacterImage, ObjectBrightness.DarkObject);
 
             Int16Image bin = new Int16Image();
+            
+            // NIEUW
             // Recreate images that are corralated / deformed
             VisionLab.Opening(binaryCharacterImage, bin, new Mask_Int32(2, 2, 1));
             
             
-            //Convert to a 32 bit format 
+            // Convert to a 32 bit format 
             Int32Image binaryCharacterImage32 = new Int32Image();
-            //Int32Image binCharImg32 = new Int32Image();
+            // Int32Image binCharImg32 = new Int32Image();
             VisionLab.Convert(bin, binaryCharacterImage32);
             bin.Dispose();
-            //Remove blobs connected to the border
+            // Remove blobs connected to the border
             VisionLab.RemoveBorderBlobs(binaryCharacterImage32, Connected.EightConnected, Border.AllBorders);
-            //Remove small blobs
+            // Remove small blobs
             VisionLab.RemoveBlobs(binaryCharacterImage32, Connected.EightConnected, BlobAnalyse.BA_Area, c_remove_blobs_min, c_remove_blobs_max);
 
             //Convert to a 16 bit format             
@@ -266,7 +276,8 @@ namespace LicPlate
             leftBottom.Dispose();
             rightBottom.Dispose();
             GC.Collect();
-            //Check if 6 characters/blobs have been found and label image.
+            // NIEUW
+            // Check if 6 characters/blobs have been found and label image.
             if (VisionLab.LabelBlobs(binaryCharacterImage, Connected.EightConnected) != 6)
                 return false;
             return true;
@@ -292,6 +303,8 @@ namespace LicPlate
         public static bool MatchPlate(Int16Image binaryCharacterImage, BlobMatcher_Int16 matcher, 
             ClassLexicon lexicon, ref LicensePlate result, ref LicensePlate lexiconResult, bool dilate)
         {
+            // NIEUW
+            // 2de optie voor aanroep als eerste low confidence levert
             if (dilate)
             {
                 Int16Image temp = new Int16Image();
@@ -314,6 +327,8 @@ namespace LicPlate
 
             //Create data structure for lexicon.
             vector_vector_LetterMatch match = new vector_vector_LetterMatch();
+            
+            // NIEUW
             // Change the matcher params
             matcher.ChangeParams(60, 10, 64, 0);
             //Process each character/blob.
@@ -329,6 +344,7 @@ namespace LicPlate
                 float err = returnMatches[0].error;
                 int id = returnMatches[0].id;
                 string chr = matcher.PatternName(id);
+                // NIEUW
                 // If error to big decrease the confidence
                 if(err > 0.20f)
                     conf -= 0.2f;
@@ -341,9 +357,13 @@ namespace LicPlate
                         chr, 
                         err, 
                         conf,
+
+                        // NIEUW
                         // Extra param: The middle of a character
                         // (used for matching patterns)
-                        b.TopLeft().x + ((b.TopRight().x - b.TopLeft().x)/2) , 
+                        b.TopLeft().x + ((b.TopRight().x - b.TopLeft().x)/2) ,
+
+                        // NIEUW
                         // All other results that we're found
                         // So we can switch between em
                         returnMatches
@@ -360,6 +380,7 @@ namespace LicPlate
                 lexiconResult.characters.Add(new LicenseCharacter(character));
             }
 
+            // NIEUW
             // Create the best match with the aid of the pattern matcher
             result.CalculateBestMatch(matcher);
             
